@@ -7,14 +7,14 @@ jobs:
       - checkout
       - run: aws s3 cp s3://petes-s3-bucket/Dataset+2024-11-07.csv .
       - run: python prepare_data.py
-      - run: aws s3 cp processed_dataset.csv s3://your-bucket-name/processed_dataset.csv
+      - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/processed_dataset.csv
 
   train_model:
     docker:
       - image: python:3.8
     steps:
       - checkout
-      - run: aws s3 cp s3://your-bucket-name/processed_dataset.csv .
+      - run: aws s3 cp s3://petes-s3-buket/processed_dataset.csv .
       - run: python train_model.py
       
 workflows:
