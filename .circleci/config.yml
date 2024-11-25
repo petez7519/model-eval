@@ -1,10 +1,16 @@
 version: 2.1
+orbs: 
+  aws-cli: circleci/aws-cli@2.0.0
 jobs:
   prepare_data:
     docker:
       - image: python:3.8
     steps:
       - checkout
+      - aws-cli/setup: 
+        aws-access-key-id: AWS_ACCESS_KEY_ID 
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY 
+        aws-region: AWS_DEFAULT_REGION
       - run: aws s3 cp s3://petes-s3-bucket/Dataset+2024-11-07.csv .
       - run: python prepare_data.py
       - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/processed_dataset.csv
@@ -14,6 +20,10 @@ jobs:
       - image: python:3.8
     steps:
       - checkout
+      aws-cli/setup: 
+        aws-access-key-id: AWS_ACCESS_KEY_ID 
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY 
+        aws-region: AWS_DEFAULT_REGION
       - run: aws s3 cp s3://petes-s3-buket/processed_dataset.csv .
       - run: python train_model.py
       
