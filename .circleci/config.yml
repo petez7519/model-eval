@@ -25,6 +25,7 @@ jobs:
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
       - run: aws s3 cp s3://petes-s3-bucket/processed_dataset.csv .
       - run: python train_model.py
+      - run: aws s3 cp trained_dataset.csv s3://petes-s3-bucket/processed_dataset.csv
 
 workflows:
   version: 2
