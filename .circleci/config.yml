@@ -5,7 +5,7 @@ jobs:
       - image: python:3.8
     steps:
       - checkout
-      - run: aws s3 cp s3://your-bucket-name/dataset.csv .
+      - run: aws s3 cp s3://petes-s3-bucket/Dataset 2024-11-07.csv .
       - run: python prepare_data.py
       - run: aws s3 cp processed_dataset.csv s3://your-bucket-name/processed_dataset.csv
 
