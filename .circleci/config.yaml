@@ -1,0 +1,26 @@
+version: 2.1
+jobs:
+  prepare_data:
+    docker:
+      - image: python:3.8
+    steps:
+      - checkout
+      - run: aws s3 cp s3://your-bucket-name/dataset.csv .
+      - run: python prepare_data.py
+      - run: aws s3 cp processed_dataset.csv s3://your-bucket-name/processed_dataset.csv
+
+  train_model:
+    docker:
+      - image: python:3.8
+    steps:
+      - checkout
+      - run: aws s3 cp s3://your-bucket-name/processed_dataset.csv .
+      - run: python train_model.py
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - prepare_data
+      - train_model
+      - evaluate_model
