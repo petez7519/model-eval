@@ -14,7 +14,7 @@ jobs:
       - run: aws s3 cp s3://petes-s3-bucket/doggie_dataset2.csv .
       - run: ls -al
       - run: python prepare_data.py
-      - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/processed_dataset.csv
+      - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/.
 
   train_model:
     docker:
