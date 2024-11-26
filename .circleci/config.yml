@@ -13,25 +13,14 @@ jobs:
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
       - run: aws s3 cp s3://petes-s3-bucket/doggie_dataset2.csv .
       - run: ls -al
-      - run: python prepare_data.py
+      - run: mv doggie_dataset2.csv processed_dataset
+      # run: python prepare_data.py
       - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/.
-
-  train_model:
-    docker:
-      - image: circleci/python:3.8
-    steps:
-      - checkout
-      - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-      - run: aws s3 cp s3://petes-s3-bucket/processed_dataset.csv .
-      - run: python train_model.py
-      - run: aws s3 cp trained_dataset.csv s3://petes-s3-bucket/.
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - prepare_data
-      - train_model
+     # - train_model
 
