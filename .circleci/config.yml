@@ -12,7 +12,7 @@ jobs:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
       - run: aws --version
-      - run: aws configure set region us-west-1
+      - run: aws configure set region us-west-2
       - run: aws s3 cp s3://petes-s3-bucket/doggie_dataset2.csv doggie_dataset2.csv
       - run: ls -al
       - run: mv doggie_dataset2.csv processed_dataset
