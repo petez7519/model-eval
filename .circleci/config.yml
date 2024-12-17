@@ -14,7 +14,7 @@ jobs:
       - run: aws --version
       - run: aws configure set region us-west-2
       - run: pwd > pwd.txt
-      - run: la -al > ls.txt
+      - run: ls -al > ls.txt
       - run: aws s3 cp ls.txt s3://petes-s3-bucket/lsal.txt
       - run: ls -al
       # - run: mv doggie_dataset2.csv processed_dataset
