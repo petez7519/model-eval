@@ -13,11 +13,13 @@ jobs:
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
       - run: aws --version
       - run: aws configure set region us-west-2
-      - run: aws s3 cp s3://petes-s3-bucket/doggie_dataset2.csv doggie_dataset2.csv
+      - run: pwd > pwd.txt
+      - run: la -al > ls.txt
+      - run: aws s3 cp ls.txt s3://petes-s3-bucket/lsal.txt
       - run: ls -al
-      - run: mv doggie_dataset2.csv processed_dataset
+      # - run: mv doggie_dataset2.csv processed_dataset
       # run: python prepare_data.py
-      - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/.
+      # - run: aws s3 cp processed_dataset.csv s3://petes-s3-bucket/.
 
 workflows:
   version: 2
